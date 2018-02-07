@@ -10,9 +10,15 @@ import processNodes from './processNodes';
  */
 export default function HtmlParser(html, {
   decodeEntities = true,
+  withStartIndices = false,
+  withEndIndices = false,
   transform,
   preprocessNodes = nodes => nodes
 }={}) {
-  const nodes = preprocessNodes(htmlparser2.parseDOM(html, { decodeEntities }));
+  const nodes = preprocessNodes(htmlparser2.parseDOM(html, { 
+    decodeEntities,
+    withStartIndices,
+    withEndIndices,
+  }));
   return processNodes(nodes, transform);
 }
